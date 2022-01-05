@@ -12,7 +12,7 @@ gcloud compute instances attach-disk demo-mount \
 #Formatting and Mounting Extra Disk on VM Instance
 Step 1: Log in to the instance and list the available extra disk using the following command.
 ```diff
-sudo lsblk
+- sudo lsblk
 ```
 An example output is shown below. All the extra disks will not have any entry under the MOUNTPOINT tab. Here, sdb is the extra disk that has to be formatted and mounted.
 
@@ -23,24 +23,27 @@ sda      8:0    0  10G  0 disk
 sdb      8:16   0  20G  0 disk
 
 Step 2: Next, we should format the disk to ext4 using the following command. In the command below we are mentioning /dev/sdb as that is the extra disk available.
-
-sudo mkfs.ext4 -m 0 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/sdb
+```diff
+- sudo mkfs.ext4 -m 0 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/sdb
+```
 
 Step 3: Next, create a mount directory on the instance as shown below. You can replace the /data-mount with a custom name and path, you prefer.
-
-sudo mkdir -p /data-mount
+```diff
+- sudo mkdir -p /data-mount
+```
 
 Step 4: Now, mount the disk to the directory we created using the following command.
-
-sudo mount -o discard,defaults /dev/sdb /data-mount
-
+```diff
+- sudo mount -o discard,defaults /dev/sdb /data-mount
+```
 If you list the block devices, you will see the mounted disk as shown below.
 
 <img width="483" alt="image" src="https://user-images.githubusercontent.com/88643508/148246829-6bdb1dd0-2410-4cfe-86ba-350315a8b020.png">
 
 Step 5: If you want write permissions to this disk for all the users, you can execute the following command. Or, based on the privileges you need for the disk, you can apply the user permissions.
-
-sudo chmod a+w /data-mount
+```diff
+- sudo chmod a+w /data-mount
+```
 Step 6: Check the mounted disk using the following command.
 
 df -h
