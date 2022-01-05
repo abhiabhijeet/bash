@@ -12,7 +12,7 @@ gcloud compute instances attach-disk demo-mount \
 #Formatting and Mounting Extra Disk on VM Instance
 Step 1: Log in to the instance and list the available extra disk using the following command.
 ```diff
-- sudo lsblk -
+- sudo lsblk
 ```
 An example output is shown below. All the extra disks will not have any entry under the MOUNTPOINT tab. Here, sdb is the extra disk that has to be formatted and mounted.
 ```diff
