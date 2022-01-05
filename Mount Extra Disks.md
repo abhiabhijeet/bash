@@ -15,12 +15,13 @@ Step 1: Log in to the instance and list the available extra disk using the follo
 - sudo lsblk
 ```
 An example output is shown below. All the extra disks will not have any entry under the MOUNTPOINT tab. Here, sdb is the extra disk that has to be formatted and mounted.
-
+```diff
 [devopscube@demo-mount ~]$ lsblk
 NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
 sda      8:0    0  10G  0 disk 
 └─sda1   8:1    0  10G  0 part /
 sdb      8:16   0  20G  0 disk
+```
 
 Step 2: Next, we should format the disk to ext4 using the following command. In the command below we are mentioning /dev/sdb as that is the extra disk available.
 ```diff
@@ -45,8 +46,9 @@ Step 5: If you want write permissions to this disk for all the users, you can ex
 - sudo chmod a+w /data-mount
 ```
 Step 6: Check the mounted disk using the following command.
-
-df -h
+```diff
+- df -h
+```
 A sample output,
 
 [devopscube@demo-mount]$ df -h
@@ -64,16 +66,19 @@ Automount GCP Disk On Reboot
 To automount the disk on system start or reboots, you need to add the mount entry to the fstab. Follow the steps given below for adding the mount to fstab.
 
 Step 1: First, back up the fstab file.
-
-sudo cp /etc/fstab /etc/fstab.backup
+```diff
+- sudo cp /etc/fstab /etc/fstab.backup
+```
 Step 2: Execute the following command to make a fstab entry with the UUID of the disk.
-
-echo UUID=`sudo blkid -s UUID -o value /dev/sdb` /data-mount ext4 discard,defaults,noatime,nofail 0 2 | sudo tee -a /etc/fstab
+```diff
+- echo UUID=`sudo blkid -s UUID -o value /dev/sdb` /data-mount ext4 discard,defaults,noatime,nofail 0 2 | sudo tee -a /etc/fstab
+```
 Step 3: Check the UUID of the extra disk
-
-sudo blkid -s UUID -o value /dev/sdb
+```diff
+- sudo blkid -s UUID -o value /dev/sdb
+```
 Step 4: Open fstab file and check for the new entry for the UUID of the extra disk
-
-sudo cat /etc/fstab
+```diff
+- sudo cat /etc/fstab
+```
 Now, on every reboot, the extra disk will automatically mount to the defined folder based on the fstab entry.
-
