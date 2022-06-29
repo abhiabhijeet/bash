@@ -13,3 +13,6 @@ date -d "$dt -1 day 0" +%s000
 date -d "$dt +1 day 2"
 
 date -d '1 month ago 0'
+
+to get the last day of each month for the current year
+date -d "2/1 + 1 month - 1 day" "+%b - %d days"
