@@ -8,6 +8,10 @@ grep 'cpu ' /proc/stat | awk '{cpu_usage=($2+$4)*100/($2+$4+$5)} END {print cpu_
 ##generate uniq number
 shuf -i 11000-65000 -n 1
 
+##Convert xlsx files to csv via command line
+ssconvert -S file.xlsx file.csv
+https://linuxconfig.org/converting-xlsx-excel-format-files-to-csv-on-linux
+
 DBQuery.shellBatchSize = 5000
 db.getCollection(name).aggregate([ {$group : {"_id" : "$columnname"  count : {$sum : 1}}} ])
 db.coll_name.distinct("hashCol" {file_name:{$regex:"/2019/07/22/"}})
